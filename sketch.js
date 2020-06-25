@@ -4,7 +4,7 @@ var mirrors = [];
 var lumio;
 
 function preload(){
-  lumio = loadImage("image/lumio.png");
+  lumio = loadImage("lumio.png");
 }
 
 function setup() {
