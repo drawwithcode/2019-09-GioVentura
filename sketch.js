@@ -7,7 +7,6 @@ var stars
 
 function preload(){
   textufo = loadImage("texture.jpg");
-  stars = loadImage("sky.jpg");
 
 }
 
