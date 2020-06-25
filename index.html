@@ -6,15 +6,34 @@
     <style> body {padding: 0; margin: 0;} </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
-    <style> body {padding: 0; margin: 0;} html, body {
+    <style>
+    body {
+  padding: 0;
+  margin: 0;
+    position: relative;
+  }
+
+  html, body {
   overflow-x: hidden;
-}
+  }
 
-body {
-  position: relative;
-}
+#info_text{
+    font-family: 'Helvetica';
+    font-size: 25px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    line-height: 44px;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
 
- </style>
+
+
+
+  </style>
+
     <script src="p5.min.js"></script>
     <!-- <script src="addons/p5.sound.min.js"></script> -->
     <script src="addons/p5.dom.min.js"></script>
@@ -22,4 +41,12 @@ body {
     <script src="sketch.js"></script>
   </head>
   <body>
+    <div id="info_text">
+  <p>
+    * Shake your device * <br>
+    to see the ufo loosing control!
+      </p>
+
+  </p>
+  </body>
 </html>

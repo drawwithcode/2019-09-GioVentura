@@ -1,9 +1,19 @@
 var value = 10;
 var rotation = 1;
 var inclination = 1;
+var textufo;
+var stars
+
+
+function preload(){
+  textufo = loadImage("texture.jpg");
+  stars = loadImage("sky.jpg");
+
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
+
   colorMode(HSB);
 
   angleMode(DEGREES);
@@ -15,7 +25,7 @@ function setup() {
 }
 
 function draw() {
-  background(240, 78, 44);
+background(0);
 
 
   rotateY(rotation);
@@ -25,10 +35,11 @@ function draw() {
   var dirY = (inclination / height - 0.5) * 3;
 
 
-  directionalLight(0, 0, 75, -dirX, -dirY, -0.5);
+  directionalLight(0, 0, 75, -dirX, -dirY, -0.22);
   directionalLight(228, 91, 86, dirX, -dirY, -0.025);
 
-  ambientMaterial(255);
+  texture(textufo);
+
 
   noStroke();
 
