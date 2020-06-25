@@ -1,63 +1,66 @@
-var value = 10;
-var rotation = 1;
-var inclination = 1;
+var angle = 0;
+var mirrors = [];
+
+var lumio;
+
+function preload(){
+  lumio = loadImage("image/lumio.png");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  colorMode(HSB);
-
   angleMode(DEGREES);
 
-  setShakeThreshold(15);
-  frameRate(12);
-
-
-
-
+  for (let i = 0; i < 14; i++) {
+    let r = random(20,100);
+    let h = 12;
+    let t_x = random(width/4);
+    let t_y = random(width/4);
+    let t_z = random(0,2);
+    mirrors[i] = new Mirror(r,h,t_x,t_y,t_z);
+  }
 }
 
 function draw() {
-  background(240, 78, 44);
+  background(0);
 
+  noCursor();
+  image(lumio, mouseX-width/2, mouseY- height/2);
 
-  rotateY(rotation);
-  rotateX(-rotation);
+  // directionalLight(100,0,140,0.4,0,-200,0);
+    pointLight(0, 0, 250, mouseX-300, mouseY-300, 0);
+    frameRate(55);
 
-  var dirX = (inclination / width - 0.5) * 3;
-  var dirY = (inclination / height - 0.5) * 3;
-
-
-  directionalLight(0, 0, 75, -dirX, -dirY, -0.5);
-  directionalLight(228, 91, 86, dirX, -dirY, -0.025);
-
-  ambientMaterial(255);
-
-  noStroke();
-
-  cone(value,value/2);
-
-  camera(0,0,200,0,0,0,0,1,0);
-
-
-}
-
-function deviceShaken() {
-    value = value + 1;
-    rotation = rotation + 10;
-    if (value > 50) {
-      value = 0;
+    for (let i = 0; i < mirrors.length; i++) {
+      mirrors[i].show();
+      mirrors[i].move();
     }
+
 }
 
-function deviceTurned() {
 
-    inclination = inclination + 50;
-    if (value > 50) {
-      inclination = 0;
-    }
-}
-//FOR IOS: request access to motion and orientation data
+class Mirror {
+  constructor(_r,_h,_t_x,_t_y,_t_z) {
+    this.r = _r;
+    this.h = _h;
+    this.x = _t_x;
+    this.y = _t_y;
+    this.z = _t_z;
+  }
+  move() {
+    rotateX(angle);
+    rotateY(angle * 0.3);
+    rotateZ(angle * 1.2);
+    angle += 0.02;
+  }
 
-function touchEnded(event) {
-  DeviceOrientationEvent.requestPermission()
+
+
+
+  show() {
+    noStroke();
+    specularMaterial(255);
+    translate(this.x/5,this.y/5,this.z/5);
+    cylinder(this.r, this.h);
+  }
 }
